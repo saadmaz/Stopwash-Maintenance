@@ -1,5 +1,6 @@
 {
-  "$schema": "../Stopwash-Website/node_modules/wrangler/config-schema.json",
+  // Cloudflare Workers Builds (connected in the dashboard) deploys every push to main.
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "stopwash-maintenance",
   "main": "src/index.js",
   "compatibility_date": "2026-10-01",
