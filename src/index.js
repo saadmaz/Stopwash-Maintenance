@@ -43,7 +43,9 @@ export default {
       if (!DOWN_STATUSES.has(response.status)) return response;
       return maintenance(request, { reason: `origin-${response.status}` });
     } catch (err) {
-      return maintenance(request, { reason: err?.name === "TimeoutError" ? "origin-timeout" : "origin-unreachable" });
+      return maintenance(request, {
+        reason: err?.name === "TimeoutError" ? "origin-timeout" : "origin-unreachable",
+      });
     }
   },
 };
@@ -59,12 +61,16 @@ function maintenance(request, { reason }) {
   // API and asset requests get a small JSON body so apps can show their own message.
   const accept = request.headers.get("Accept") || "";
   const isRead = request.method === "GET" || request.method === "HEAD";
-  const wantsHtml = isRead && (accept.includes("text/html") || !accept.includes("application/json"));
+  const wantsHtml =
+    isRead && (accept.includes("text/html") || !accept.includes("application/json"));
   if (!wantsHtml) {
-    return new Response(JSON.stringify({ error: "maintenance", message: "This service is temporarily unavailable." }), {
-      status: 503,
-      headers: { ...headers, "Content-Type": "application/json; charset=utf-8" },
-    });
+    return new Response(
+      JSON.stringify({ error: "maintenance", message: "This service is temporarily unavailable." }),
+      {
+        status: 503,
+        headers: { ...headers, "Content-Type": "application/json; charset=utf-8" },
+      },
+    );
   }
 
   return new Response(request.method === "HEAD" ? null : PAGE, {
