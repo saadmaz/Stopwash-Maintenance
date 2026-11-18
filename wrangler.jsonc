@@ -1,0 +1,13 @@
+{
+  "$schema": "../Stopwash-Website/node_modules/wrangler/config-schema.json",
+  "name": "stopwash-maintenance",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  // Catches every subdomain that is proxied (orange cloud) in DNS. stopwash.lk and www.stopwash.lk are
+  // custom domains of stopwash-website and take precedence, so the main site is unaffected.
+  // DNS-only (grey cloud) records bypass Cloudflare entirely and never reach this Worker.
+  "routes": [{ "pattern": "*.stopwash.lk/*", "zone_name": "stopwash.lk" }],
+  "observability": { "enabled": true }
+}
