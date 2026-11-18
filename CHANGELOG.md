@@ -39,6 +39,7 @@ First versioned release of the stopwash.lk maintenance fallback.
 
 - Cloudflare Worker `stopwash-maintenance` on the route `*.stopwash.lk/*`, serving a branded 503 maintenance page (JSON for API requests) to unknown subdomains and to apps whose server is down.
 - Per-host handling for `stopwash.lk`, `www.stopwash.lk`, `pos`, `accounts`, `euro`, `hr` `.stopwash.lk`.
+- The official STOPWASH logo and favicon on the maintenance page, inlined as SVG so nothing is fetched.
 - Behaviour tests run with Node.js, with no dependencies.
 - Continuous integration on every push and pull request: formatting, tests and a dry-run bundle.
 - Deploy workflow that waits for the Cloudflare Workers build of `main` and smoke-tests the live Worker.
